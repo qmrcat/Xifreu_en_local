@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ca-AD" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="favicon.ico" sizes="32x32">
+  <link rel="stylesheet" href="style.css">
+  <title>CiberGanxets | Un xifrat/desxifrat de fitxers, gratuït, ràpid, segur i sense servidor, sols del costat del navegador.</title>
+  <meta name="Description" content="xifreu i desxifreu fitxers de forma segura al vostre navegador mitjançant l'algoritme AES 256.">
+  <meta name="Keywords" content="xifrar desxifrar xifratge xifratge de fitxers javascript desxifrat sense servidor al costat del client aes-encryption aes-256 aes-128-xifratge-desxifrat webcrypto webcryptoapi criptatge del navegador al navegador">
+</head>
+<body>
+  <div class="theme-switch-container">
+    <label class="theme-switch" for="theme-toggle">
+      <input type="checkbox" id="theme-toggle" />
+      <span class="slider"></span>
+    </label>
+    <span id="theme-icon" class="theme-icon">☀️</span>
+  </div>
+
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-center">
+          <h2 class="title">Xifreu en local</h2>
+          <p class="lead">
+            Xifratge i desxifrat de fitxers.
+          </p>
+          <p class="lead">
+            Lliure, Ràpid, Segur i Sense servidor
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main role="main" class="container">
+    <noscript>
+      <div class="alert alert-danger">
+        <strong>Avis!</strong><br>
+        Javascript està deshabilitat al vostre navegador web.<br>
+        Si us plau, per veure correctament aquest lloc.<br>
+        <b><i>Habiliteu el JavaScript</i></b>.<br>
+        Per veure les instruccions per habilitar javascript, feu clic <a href="http://www.enable-javascript.com" target="_blank" rel="noopener">aquí</a>.
+      </div>
+    </noscript>	
+
+    <div class="container">
+      <div class="row">
+        <div class="col-center">
+          <div id="msg-navegador"></div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">
+              <div id="file-placeholder">Trieu un fitxer per xifrar / desxifrar</div>
+            </label>
+          </div>
+          <br><br>
+          <div class="form-group">
+            <div class="input-group">
+              <label for="inputPassword"></label>
+              <input type="text" id="inputPassword" placeholder="Introduïu una clau de desxifrat o genereu-ne una (es recomana)" 
+                      class="form-control" aria-describedby="passwordHelpInline" value="">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="generateButton" title="Genera una clau segura">
+                  <i class="fas fa-sync-alt">↻</i>
+                </button>
+              </div>
+            </div>
+            <small id="passwordHelpInline" class="text-muted">
+              <b>Potencia/força de la clau</b>: <span id="strength-text">Cap, per definir</span>
+            </small>
+            <div class="progress">
+              <div class="progress-bar bg-secondary" id="strength-meter" role="progressbar" style="width: 100%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="4"></div>
+            </div>
+            <small class="text-muted">
+            <b>Recomanacions per a una bona contrasenya</b><br>
+            Una contrasenya segura ha de tenir com a mínim tres d'aquestes quatre característiques:<br>
+            Tenir números, tenir lletres, tenir majúscules i minúscules, tenir símbols (!, $, %, &, #, ., etc.)	i com a mínim, 12 caràcters.&nbsp;&nbsp; 
+            <a href="#mesinfo" class="btn-xs btn-info"> &nbsp;Més informació&nbsp; </a>
+            <div id="mesinfo" class="collapse">
+            <br>
+            <ul>
+              <li><strong>Sense dades personals o professionals</strong></li>
+            </ul>
+            <p>No la construïu a partir d'informació&nbsp; personal&nbsp; que pugui ser deduïda fàcilment (data de naixement, DNI, nom de les mascotes, noms de familiars, número de telèfon, etc.), ja que es poden endevinar amb facilitat.</p>
+            <ul>
+              <li><strong>Com més llarga, millor</strong></li>
+            </ul>
+            <p>La&nbsp; longitud&nbsp; de&nbsp; la&nbsp; contrasenya&nbsp; és&nbsp; important.&nbsp; Com més&nbsp; llarga&nbsp; sigui&nbsp; la&nbsp; contrasenya,&nbsp; més&nbsp; difícil&nbsp; d'endevinar serà. Es recomana construir contrasenyes de, com a mínim,<strong> vuit caràcters</strong>.</p>
+            <ul>
+              <li><strong>Sense sentit</strong></li>
+            </ul>
+            <p>Sempre&nbsp; és&nbsp; millor&nbsp; no&nbsp; utilitzar&nbsp; noms propis, noms o cites de pel·lícules, de llibres, o de persones conegudes, paraules&nbsp; que&nbsp; puguin trobar-se&nbsp; en&nbsp; un&nbsp; diccionari, i tot amb&nbsp; independència&nbsp; de l'idioma&nbsp; emprat.</p>
+            <ul>
+              <li><strong>No deixeu contrasenyes en blanc ni basades només en espais</strong></li>
+            </ul>
+            <ul>
+              <li><strong>Sense repeticions</strong></li>
+            </ul>
+            <p>Si&nbsp; la&nbsp; contrasenya&nbsp; és&nbsp; prou&nbsp; llarga&nbsp; però&nbsp; repeteix&nbsp; un mateix caràcter diverses vegades, perdrà força perquè&nbsp; resultarà&nbsp; més&nbsp; fàcil&nbsp; d'endevinar.&nbsp; Per&nbsp; tant, hem d'evitar d'utilitzar contrasenyes de l'estil 111abcde?.</p>
+            <ul>
+              <li><strong>Una mica de tot</strong></li>
+            </ul>
+            <p>Per millorar la fortalesa de la contrasenya, aquesta hauria de tenir una mica de tot: números, lletres majúscules i minúscules i alguns caràcters especials (*, +, €, %, @...).</p>
+            <ul>
+              <li><strong>Renoveu-la amb periodicitat</strong></li>
+            </ul>
+            <p>Si&nbsp; teniu&nbsp; una&nbsp; contrasenya&nbsp; complexa,&nbsp; per còmoda que sigui, he d'evitar reciclar-la afegint un nou dígit a la contrasenya actual.</p>
+            <ul>
+              <li><strong>Per a cada servei o web, una contrasenya diferent</strong></li>
+            </ul>
+            <p>Per al correu electrònic, xarxes socials com Facebook o Twitter, botigues en línia, entitats bancàries, etc.</p>
+            <ul>
+              <li><strong>No utilitzeu la mateixa paraula o combinació per al nom d'usuari i la contrasenya</strong></li>
+            </ul>
+            <ul>
+              <li><strong>No la faciliteu a ningú</strong></li>
+            </ul>
+            <ul>
+              <li><strong>Eviteu escriure-la enlloc, deixar-la en una nota enganxada a l'ordinador o emmagatzemar-la a l'ordinador o en un dispositiu</strong></li>
+            </ul>
+            <br>
+            </div>
+            </small>
+          </div>
+
+          <button type="button" class="btn btn-outline-dark" id="encryptBtn">Xifrar</button>
+          <button type="button" class="btn btn-outline-dark" id="decryptBtn">Desxifrar</button>
+          <button type="button" class="btn btn-outline-danger" id="resetBtn"><i class="fas fa-redo">↺</i> Restableix</button>
+          <br>
+          <small class="text-muted">
+            Els fitxers no es carreguen al servidor, tot es fa fora de línia, al vostre navegador i al vostre equip.
+          </small>
+          <br>
+          <br>
+
+          <div id="error"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-center" id="results">
+          <!-- Els resultats apareixeran aquí -->
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <div class="loader">
+    <div class="sk-folding-cube">
+      <div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <p>Basat en <a href="https://hat.sh/" class="text-dark">hat.sh</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts modulars -->
+  <script type="module" src="utils.js"></script>
+  <script type="module" src="zxcvbn.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
