@@ -53,10 +53,6 @@ Una aplicació web per a xifrar i desxifrar fitxers de forma segura al navegador
 
 Per a màxima seguretat, es recomana utilitzar Firefox, ja que alguns altres navegadors poden limitar certes operacions criptogràfiques.
 
-## Projecte basat en
-
-Aquesta aplicació està basada en el projecte original [hat.sh](https://hat.sh/), amb modificacions i millores específiques per a CiberGanxets.cat.
-
 ## Llicència
 
 Aquest projecte és programari lliure.
